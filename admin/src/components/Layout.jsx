@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 export default function Layout() {
+  const [open, setOpen] = useState(false);
   const nav = useNavigate();
+
   const logout = () => {
     localStorage.removeItem('cc_token');
     nav('/login');
@@ -15,8 +18,35 @@ export default function Layout() {
   ];
 
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-64 bg-card border-r border-coral/20 p-6 flex flex-col">
+    <div className="flex min-h-screen relative">
+      {/* Mobile top bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-card border-b border-coral/20 px-4 py-3 flex justify-between items-center">
+        <div className="text-2xl font-script text-coral">Charlie's Cup</div>
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-2xl text-cream"
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Overlay when drawer open on mobile */}
+      {open && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/60 z-30"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed md:static inset-y-0 left-0 z-40
+          w-64 bg-card border-r border-coral/20 p-6 flex flex-col
+          transform transition-transform duration-200
+          ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}
+      >
         <div className="mb-10">
           <div className="text-4xl font-script text-coral">Charlie's Cup</div>
           <div className="text-xs text-cream/60 mt-1">Admin Panel</div>
@@ -27,6 +57,7 @@ export default function Layout() {
               key={l.to}
               to={l.to}
               end
+              onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `block px-4 py-3 rounded-xl transition ${
                   isActive
@@ -46,7 +77,9 @@ export default function Layout() {
           Logout
         </button>
       </aside>
-      <main className="flex-1 p-8 overflow-y-auto">
+
+      {/* Main content */}
+      <main className="flex-1 p-4 md:p-8 mt-14 md:mt-0 overflow-y-auto w-full">
         <Outlet />
       </main>
     </div>
