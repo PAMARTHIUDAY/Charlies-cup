@@ -1,0 +1,61 @@
+# Node
+node_modules/
+npm-debug.log*
+.env
+.env.local
+
+# Flutter
+app/.dart_tool/
+app/build/
+app/.flutter-plugins
+app/ios/Pods/
+app/android/.gradle/
+app/android/key.properties
+app/android/app/upload-keystore.jks
+
+# React
+admin/dist/
+admin/node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+certs/
+pgdata/# Node
+node_modules/
+npm-debug.log*
+.env
+.env.local
+
+# Flutter
+app/.dart_tool/
+app/build/
+app/.flutter-plugins
+app/ios/Pods/
+app/android/.gradle/
+app/android/key.properties
+app/android/app/upload-keystore.jks
+
+# React
+admin/dist/
+admin/node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+certs/
+pgdata/
